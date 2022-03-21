@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Context;
+namespace Mvdgeijn\DirectAdmin\Context;
 
-use Omines\DirectAdmin\DirectAdmin;
-use Omines\DirectAdmin\DirectAdminException;
-use Omines\DirectAdmin\Objects\Domain;
-use Omines\DirectAdmin\Objects\Users\User;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
+use Mvdgeijn\DirectAdmin\Objects\Domain;
+use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
 /**
  * Context for user functions.

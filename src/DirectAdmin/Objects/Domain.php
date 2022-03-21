@@ -8,15 +8,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects;
+namespace Mvdgeijn\DirectAdmin\Objects;
 
-use Omines\DirectAdmin\Context\UserContext;
-use Omines\DirectAdmin\DirectAdminException;
-use Omines\DirectAdmin\Objects\Domains\Subdomain;
-use Omines\DirectAdmin\Objects\Email\Forwarder;
-use Omines\DirectAdmin\Objects\Email\Mailbox;
-use Omines\DirectAdmin\Objects\Users\User;
-use Omines\DirectAdmin\Utility\Conversion;
+use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
+use Mvdgeijn\DirectAdmin\Objects\Domains\Subdomain;
+use Mvdgeijn\DirectAdmin\Objects\Email\Forwarder;
+use Mvdgeijn\DirectAdmin\Objects\Email\Mailbox;
+use Mvdgeijn\DirectAdmin\Objects\Users\User;
+use Mvdgeijn\DirectAdmin\Utility\Conversion;
 
 /**
  * Encapsulates a domain and its derived objects, like aliases, pointers and mailboxes.

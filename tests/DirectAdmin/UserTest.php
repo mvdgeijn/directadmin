@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-use Omines\DirectAdmin\Context\AdminContext;
-use Omines\DirectAdmin\Context\UserContext;
-use Omines\DirectAdmin\DirectAdmin;
-use Omines\DirectAdmin\Objects\Domain;
-use Omines\DirectAdmin\Objects\Users\User;
+use Mvdgeijn\DirectAdmin\Context\AdminContext;
+use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\Objects\Domain;
+use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
 /**
  * UserTest.

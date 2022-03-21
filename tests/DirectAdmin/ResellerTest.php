@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-use Omines\DirectAdmin\Context\AdminContext;
-use Omines\DirectAdmin\Context\ResellerContext;
-use Omines\DirectAdmin\DirectAdmin;
-use Omines\DirectAdmin\Objects\Users\Reseller;
+use Mvdgeijn\DirectAdmin\Context\AdminContext;
+use Mvdgeijn\DirectAdmin\Context\ResellerContext;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\Objects\Users\Reseller;
 
 /**
  * ResellerTest.

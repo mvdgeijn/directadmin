@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects\Domains;
+namespace Mvdgeijn\DirectAdmin\Objects\Domains;
 
-use Omines\DirectAdmin\Objects\Domain;
-use Omines\DirectAdmin\Objects\DomainObject;
+use Mvdgeijn\DirectAdmin\Objects\Domain;
+use Mvdgeijn\DirectAdmin\Objects\DomainObject;
 
 /**
  * Subdomain.

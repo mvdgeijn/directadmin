@@ -8,12 +8,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Context;
+namespace Mvdgeijn\DirectAdmin\Context;
 
-use Omines\DirectAdmin\Objects\BaseObject;
-use Omines\DirectAdmin\Objects\Users\Admin;
-use Omines\DirectAdmin\Objects\Users\Reseller;
-use Omines\DirectAdmin\Objects\Users\User;
+use Mvdgeijn\DirectAdmin\Objects\BaseObject;
+use Mvdgeijn\DirectAdmin\Objects\Users\Admin;
+use Mvdgeijn\DirectAdmin\Objects\Users\Reseller;
+use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
 /**
  * Context for administrator functions.

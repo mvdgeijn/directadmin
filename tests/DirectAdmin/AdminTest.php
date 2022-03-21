@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-use Omines\DirectAdmin\Context\AdminContext;
-use Omines\DirectAdmin\DirectAdmin;
-use Omines\DirectAdmin\Objects\Users\Admin;
+use Mvdgeijn\DirectAdmin\Context\AdminContext;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\Objects\Users\Admin;
 
 /**
  * Tests admin level functionality.

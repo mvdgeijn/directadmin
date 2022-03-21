@@ -9,7 +9,9 @@
 This is a PHP client library to manage DirectAdmin control panel servers. We simply decided to develop this as we needed
 automation of our own DirectAdmin servers, and the existing implementations were unsupported and incomplete.
 
-[API documentation for this project is automatically generated on each push](https://omines.github.io/directadmin/api/).
+21-3-2022: Moved to mvdgeijn/directadmin, as omines/directadmin is abandoned and we needed more API implementations.
+
+[API documentation for this project is automatically generated on each push](https://mvdgeijn.github.io/directadmin/api/).
 
 ## Changed / Added
 
@@ -41,7 +43,7 @@ are 5.6, 7.0, 7.1 and hhvm.
 To set up the connection use one of the base functions:
 
 ```php
-use Omines\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
 
 $adminContext = DirectAdmin::connectAdmin('http://hostname:2222', 'admin', 'pass');
 $resellerContext = DirectAdmin::connectReseller('http://hostname:2222', 'reseller', 'pass');
@@ -49,9 +51,9 @@ $userContext = DirectAdmin::connectUser('http://hostname:2222', 'user', 'pass');
 ```
 
 These functions return an
-[`AdminContext`](https://omines.github.io/directadmin/api/class-Omines.DirectAdmin.Context.AdminContext.html),
-[`ResellerContext`](https://omines.github.io/directadmin/api/class-Omines.DirectAdmin.Context.ResellerContext.html), and
-[`UserContext`](https://omines.github.io/directadmin/api/class-Omines.DirectAdmin.Context.UserContext.html)
+[`AdminContext`](https://mvdgeijn.github.io/directadmin/api/class-Mvdgeijn.DirectAdmin.Context.AdminContext.html),
+[`ResellerContext`](https://mvdgeijn.github.io/directadmin/api/class-Mvdgeijn.DirectAdmin.Context.ResellerContext.html), and
+[`UserContext`](https://mvdgeijn.github.io/directadmin/api/class-Mvdgeijn.DirectAdmin.Context.UserContext.html)
 respectively exposing the functionality available at the given level. All three extend eachother as DirectAdmin uses a
 strict is-a model. To act on behalf of a user you can use impersonation calls:
 
@@ -65,7 +67,7 @@ when managing a user's domains:
 ```php
 $domain = $adminContext->getUser('user')->getDomain('example.tld');
 ```
-This returns, if the domain exists, a [`Domain`](https://omines.github.io/directadmin/api/class-Omines.DirectAdmin.Objects.Domain.html)
+This returns, if the domain exists, a [`Domain`](https://mvdgeijn.github.io/directadmin/api/class-Mvdgeijn.DirectAdmin.Objects.Domain.html)
 instance in the context of its owning user, allowing you to manage its email accounts et al transparently.
 
 ## Contributions

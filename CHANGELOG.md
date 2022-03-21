@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## Abandoned
+ - Omines/Directadmin abandoned
+ - Moved to Mvdgeijn/Directadmin
+
 ## Changed
  - Switch to PHP-CS-Fixer 2
  - Switch to new Coveralls packages

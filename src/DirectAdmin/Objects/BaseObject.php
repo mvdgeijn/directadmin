@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects;
+namespace Mvdgeijn\DirectAdmin\Objects;
 
-use Omines\DirectAdmin\Context\UserContext;
-use Omines\DirectAdmin\DirectAdminException;
+use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
 
 /**
  * Basic wrapper around a DirectAdmin object as observed within a specific context.

@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects\Email;
+namespace Mvdgeijn\DirectAdmin\Objects\Email;
 
-use Omines\DirectAdmin\Objects\Domain;
+use Mvdgeijn\DirectAdmin\Objects\Domain;
 
 /**
  * Encapsulates an email forwarder.

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin;
+namespace Mvdgeijn\DirectAdmin;
 
 /**
  * Basic exception for issues arising in the client API.

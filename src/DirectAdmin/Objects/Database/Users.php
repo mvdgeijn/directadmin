@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects\Database;
+namespace Mvdgeijn\DirectAdmin\Objects\Database;
 
-use Omines\DirectAdmin\Objects\BaseObject;
-use Omines\DirectAdmin\Objects\Database;
+use Mvdgeijn\DirectAdmin\Objects\BaseObject;
+use Mvdgeijn\DirectAdmin\Objects\Database;
 
 /**
  * AccessHost.

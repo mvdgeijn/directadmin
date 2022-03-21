@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects\Users;
+namespace Mvdgeijn\DirectAdmin\Objects\Users;
 
-use Omines\DirectAdmin\Context\AdminContext;
-use Omines\DirectAdmin\Context\UserContext;
-use Omines\DirectAdmin\DirectAdminException;
+use Mvdgeijn\DirectAdmin\Context\AdminContext;
+use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
 
 /**
  * Admin.

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-use Omines\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
 
 /**
  * AccountManagementTest.

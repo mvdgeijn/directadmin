@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Context;
+namespace Mvdgeijn\DirectAdmin\Context;
 
-use Omines\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
 
 /**
  * Encapsulates a contextual connection to a DirectAdmin server.
