@@ -8,17 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Objects\Users;
+namespace Mvdgeijn\DirectAdmin\Objects\Users;
 
-use Omines\DirectAdmin\Context\ResellerContext;
-use Omines\DirectAdmin\Context\UserContext;
-use Omines\DirectAdmin\DirectAdmin;
-use Omines\DirectAdmin\DirectAdminException;
-use Omines\DirectAdmin\Objects\BaseObject;
-use Omines\DirectAdmin\Objects\Database;
-use Omines\DirectAdmin\Objects\Domain;
-use Omines\DirectAdmin\Objects\LoginKey;
-use Omines\DirectAdmin\Utility\Conversion;
+use Mvdgeijn\DirectAdmin\Context\ResellerContext;
+use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
+use Mvdgeijn\DirectAdmin\Objects\BaseObject;
+use Mvdgeijn\DirectAdmin\Objects\Database;
+use Mvdgeijn\DirectAdmin\Objects\Domain;
+use Mvdgeijn\DirectAdmin\Objects\LoginKey;
+use Mvdgeijn\DirectAdmin\Utility\Conversion;
 
 /**
  * User.
