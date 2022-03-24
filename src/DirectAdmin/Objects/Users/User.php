@@ -202,6 +202,16 @@ class User extends BaseObject
     }
 
     /**
+     * Returns the reseller's email address
+     *
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->getConfig('email');
+    }
+
+    /**
      * @return Domain[]
      */
     public function getDatabases(): array

@@ -198,4 +198,17 @@ class DirectAdmin
 
         return $this;
     }
+
+    /**
+     * Should the response be json or the old return types
+     *
+     * @param $json
+     * @return $this
+     */
+    public function setJson($json = true):self
+    {
+        $this->json = $json;
+
+        return $this;
+    }
 }

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Omines\DirectAdmin\Utility;
+namespace Mvdgeijn\DirectAdmin\Utility;
 
 /**
  * Static helper class for various conversion operations.
