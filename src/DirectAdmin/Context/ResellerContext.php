@@ -166,6 +166,29 @@ class ResellerContext extends UserContext
         return BaseObject::toObjectArray($this->invokeApiGet('SHOW_USERS'), User::class, $this);
     }
 
+
+    /**
+     * Get the user that belongs to the domain
+     *
+     * @param $domain
+     * @return array
+     */
+    public function getDomainOwner( $domain )
+    {
+        return $this->invokeApiGet('DOMAIN_OWNERS', ['domain' => $domain ] );
+    }
+
+    /**
+     * Get the user that belongs to the domain
+     *
+     * @param $domain
+     * @return array
+     */
+    public function getDomainOwners( )
+    {
+        return $this->invokeApiGet('DOMAIN_OWNERS' );
+    }
+
     /**
      * get reseller statistics / active package settings
      *
