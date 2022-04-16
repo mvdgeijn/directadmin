@@ -72,6 +72,11 @@ class UserContext extends BaseContext
         return $this->user;
     }
 
+    public function getUsage()
+    {
+        return $this->getContextUser()->getUsage();
+    }
+
     /**
      * Returns a domain managed by the current user.
      *

@@ -126,7 +126,7 @@ class User extends BaseObject
      */
     public function getBandwidthUsage(): float
     {
-        return floatval($this->getUsage('bandwidth'));
+        return floatval($this->getUsageItem('bandwidth'));
     }
 
     /**
@@ -144,7 +144,7 @@ class User extends BaseObject
      */
     public function getDatabaseUsage(): int
     {
-        return intval($this->getUsage('mysql'));
+        return intval($this->getUsageItem('mysql'));
     }
 
     /**
@@ -162,7 +162,7 @@ class User extends BaseObject
      */
     public function getDiskUsage(): float
     {
-        return floatval($this->getUsage('quota'));
+        return floatval($this->getUsageItem('quota'));
     }
 
     /**
@@ -190,7 +190,7 @@ class User extends BaseObject
      */
     public function getDomainUsage(): int
     {
-        return intval($this->getUsage('vdomains'));
+        return intval($this->getUsageItem('vdomains'));
     }
 
     /**
@@ -264,6 +264,13 @@ class User extends BaseObject
     public function getType(): string
     {
         return $this->getConfig('usertype');
+    }
+
+    public function getUsage(): array
+    {
+        return $this->getCache(self::CACHE_USAGE,function () {
+            return $this->getContext()->invokeApiGet('SHOW_USER_USAGE', ['user' => $this->getUsername()]);
+        });
     }
 
     /**
@@ -399,7 +406,7 @@ class User extends BaseObject
      * @param string $item Usage item to retrieve
      * @return mixed The value of the stats item, or NULL
      */
-    private function getUsage(string $item)
+    private function getUsageItem(string $item)
     {
         return $this->getCacheItem(self::CACHE_USAGE, $item, function () {
             return $this->getContext()->invokeApiGet('SHOW_USER_USAGE', ['user' => $this->getUsername()]);
