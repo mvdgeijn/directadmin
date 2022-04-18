@@ -81,6 +81,22 @@ class Mailbox extends MailObject
     }
 
     /**
+     * Set the new quota for this mailbox.
+     *
+     * @param int quota
+     */
+    public function setDiskLimit($diskLimit)
+    {
+        $this->invokePost('POP', 'modify', [
+            'user' => $this->getPrefix(),
+            'passwd' => '',
+            'passwd2' => '',
+            'quota' => $diskLimit
+        ]);
+    }
+
+
+    /**
      * Returns the disk quota in megabytes.
      *
      * @return float|null
