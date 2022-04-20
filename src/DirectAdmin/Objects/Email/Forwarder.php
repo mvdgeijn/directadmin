@@ -71,6 +71,22 @@ class Forwarder extends MailObject
     }
 
     /**
+     * Updates an existing forwarder and returns the new Forwarder object
+     *
+     * @param $recipients
+     * @return Forwarder
+     */
+    public function setRecipients($recipients )
+    {
+        $this->getDomain()->invokePost('EMAIL_FORWARDERS', 'modify', [
+            'user' => $this->getPrefix(),
+            'email' => is_array($recipients) ? implode(',', $recipients) : $recipients,
+        ]);
+
+        return new self($this->getPrefix(), $this->getDomain(), $recipients);
+    }
+
+    /**
      * Returns the list of valid aliases for this account.
      *
      * @return string[]
