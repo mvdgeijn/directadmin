@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin\Objects;
 
 use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
 /**
@@ -113,6 +114,16 @@ class Database extends BaseObject
         });
     }
 
+    public function getQuota()
+    {
+        $quotas = $this->getContext()->getContextUser()->getDatabaseQuotas();
+
+        if( isset( $quotas[$this->getName()] ) ) {
+            return $quotas[$this->getName()];
+        } else {
+            throw new DirectAdminException('Username incorrect on database ' . $this->getDatabaseName() );
+        }
+    }
 
     /**
      * @param string $name
@@ -131,6 +142,14 @@ class Database extends BaseObject
     public function getDatabaseName()
     {
         return $this->databaseName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatabaseShortName()
+    {
+        return $this->getName();
     }
 
     /**

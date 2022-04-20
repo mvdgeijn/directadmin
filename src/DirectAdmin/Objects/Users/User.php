@@ -29,6 +29,7 @@ class User extends BaseObject
 {
     const CACHE_CONFIG = 'config';
     const CACHE_DATABASES = 'databases';
+    const CACHE_DATABASE_QUOTAS = 'database_quotas';
     const CACHE_USAGE = 'usage';
 
     /** @var Domain[] * */
@@ -212,7 +213,7 @@ class User extends BaseObject
     }
 
     /**
-     * @return Domain[]
+     * @return Database[]
      */
     public function getDatabases(): array
     {
@@ -227,6 +228,22 @@ class User extends BaseObject
             }
 
             return $databases;
+        });
+    }
+
+    public function getDatabaseQuotas(): array
+    {
+        return $this->getCache(self::CACHE_DATABASE_QUOTAS, function () {
+            $quotas = [];
+            foreach ($this->getSelfManagedContext()->invokeApiGet('DATABASES',['action' => 'quota']) as $fullName => $quota ) {
+                list($user, $db) = explode('_', $fullName, 2);
+                if ($this->getUsername() != $user) {
+                    throw new DirectAdminException('Username incorrect on database ' . $fullName);
+                }
+                $quotas[$db] = $quota;
+            }
+
+            return $quotas;
         });
     }
 
