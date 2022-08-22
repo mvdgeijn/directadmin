@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin\Context;
 
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
+use Mvdgeijn\DirectAdmin\Objects\Ip;
 use Mvdgeijn\DirectAdmin\Objects\ResellerPackage;
 use Mvdgeijn\DirectAdmin\Objects\Users\Admin;
 use Mvdgeijn\DirectAdmin\Objects\Users\Reseller;
@@ -138,6 +139,17 @@ class AdminContext extends ResellerContext
         $packages = $this->getResellerPackages();
         return $packages[$package] ?? null;
     }
+
+    /**
+     * Returns the list with all IPs
+     *
+     * @return array
+     */
+    public function getIPs()
+    {
+        return BaseObject::toRichObjectArray($this->invokeApiGet('IP_MANAGER'), Ip::class, $this );
+    }
+
 
     /**
      * Returns a new AdminContext acting as the specified admin.
