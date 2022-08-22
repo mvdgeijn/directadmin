@@ -116,6 +116,14 @@ class ResellerPackage extends BaseObject
     }
 
     /**
+     * @return string
+     */
+    public function getPackageName(): string
+    {
+        return $this->getName();
+    }
+
+    /**
      * @return bool
      */
     public function isAftp(): bool
