@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin\Context;
 
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
+use Mvdgeijn\DirectAdmin\Objects\UserPackage;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
 /**
@@ -220,4 +221,26 @@ class ResellerContext extends UserContext
     {
         return new UserContext($this->getConnection()->loginAs($username), $validate);
     }
+
+    /**
+     * Returns the list of reseller packages
+     *
+     * @return UserPackage[]
+     */
+    public function getUserPackages()
+    {
+        return BaseObject::toRichObjectArray($this->invokeApiGet('PACKAGES_USER', ['full' => 'yes']), UserPackage::class, $this);
+    }
+
+    /**
+     * Returns the reseller package
+     *
+     * @return UserPackage
+     */
+    public function getUserPackage( string $package )
+    {
+        $packages = $this->getUserPackages();
+        return $packages[$package] ?? null;
+    }
+
 }
