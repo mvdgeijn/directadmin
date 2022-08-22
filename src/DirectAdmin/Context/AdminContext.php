@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin\Context;
 
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
+use Mvdgeijn\DirectAdmin\Objects\Package;
 use Mvdgeijn\DirectAdmin\Objects\Users\Admin;
 use Mvdgeijn\DirectAdmin\Objects\Users\Reseller;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
@@ -97,7 +98,7 @@ class AdminContext extends ResellerContext
     public function getReseller($username)
     {
         $resellers = $this->getResellers();
-        return isset($resellers[$username]) ? $resellers[$username] : null;
+        return $resellers[$username] ?? null;
     }
 
     /**
@@ -109,6 +110,28 @@ class AdminContext extends ResellerContext
     {
         return BaseObject::toObjectArray($this->invokeApiGet('SHOW_RESELLERS'), Reseller::class, $this);
     }
+
+    /**
+     * Returns the list of reseller packages
+     *
+     * @return Package[]
+     */
+    public function getResellerPackages()
+    {
+        return BaseObject::toRichObjectArray($this->invokeApiGet('PACKAGES_RESELLER', ['full' => 'yes']), Package::class, $this);
+    }
+
+    /**
+     * Returns the reseller package
+     *
+     * @return Package
+     */
+    public function getResellerPackage( string $package )
+    {
+        $packages = $this->getResellerPackages();
+        return $packages[$package] ?? null;
+    }
+
 
     /**
      * Returns a new AdminContext acting as the specified admin.
