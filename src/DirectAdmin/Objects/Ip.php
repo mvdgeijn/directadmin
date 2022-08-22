@@ -41,8 +41,8 @@ class Ip extends BaseObject
      * Database constructor.
      *
      * @param string $name Name of the database
-     * @param Reseller $owner Database owner
-     * @param UserContext $context Context within which the object is valid
+     * @param AdminContext $context Context within which the object is valid
+     * @param string $content parameters
      */
     public function __construct($name, AdminContext $context, string $content)
     {

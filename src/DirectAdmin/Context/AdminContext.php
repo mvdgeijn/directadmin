@@ -10,6 +10,8 @@
 
 namespace Mvdgeijn\DirectAdmin\Context;
 
+use GuzzleHttp\Exception\GuzzleException;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
 use Mvdgeijn\DirectAdmin\Objects\Ip;
 use Mvdgeijn\DirectAdmin\Objects\ResellerPackage;
@@ -148,6 +150,26 @@ class AdminContext extends ResellerContext
     public function getIPs()
     {
         return BaseObject::toRichObjectArray($this->invokeApiGet('IP_MANAGER'), Ip::class, $this );
+    }
+
+    /**
+     * @param string $ip
+     * @param string $netmask
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function addIP( string $ip, string $netmask ): bool
+    {
+        try {
+            $result = $this->invokeApiPost('IP_MANAGER', ['action' => 'add', 'ip' => $ip, 'netmask' => $netmask]);
+
+            $result = $result['error'] == "0";
+        } catch( DirectAdminException|GuzzleException $e ) {
+            error_log( $e->getMessage() );
+            $result = false;
+        }
+
+        return $result;
     }
 
 
