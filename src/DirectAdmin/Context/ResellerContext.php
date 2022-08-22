@@ -10,6 +10,7 @@
 
 namespace Mvdgeijn\DirectAdmin\Context;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
 use Mvdgeijn\DirectAdmin\Objects\UserPackage;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
@@ -52,6 +53,7 @@ class ResellerContext extends UserContext
      * @param string $endpoint API endpoint to invoke
      * @param string $returnType Class name that should wrap the resulting account
      * @return object An instance of the type specified in $returnType
+     * @throws GuzzleException
      */
     protected function createAccount($username, $password, $email, $options, $endpoint, $returnType)
     {

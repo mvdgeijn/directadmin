@@ -57,6 +57,13 @@ class AdminContext extends ResellerContext
         return $this->createAccount($username, $password, $email, $options, 'ACCOUNT_RESELLER', Reseller::class);
     }
 
+    public function checkIfUserExists( $user ): bool
+    {
+        $result = $this->invokeApiGet('USER_EXISTS', ['user' => $user]);
+
+        return( $result['error'] == "0" && $result['exists'] != "0" );
+    }
+
     /**
      * Returns a list of known admins on the server.
      *

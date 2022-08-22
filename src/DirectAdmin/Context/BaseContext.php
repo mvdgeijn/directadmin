@@ -10,6 +10,7 @@
 
 namespace Mvdgeijn\DirectAdmin\Context;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Mvdgeijn\DirectAdmin\DirectAdmin;
 
 /**
@@ -68,6 +69,7 @@ abstract class BaseContext
      * @param string $command DirectAdmin API command to invoke
      * @param array $postParameters Optional form parameters
      * @return array The parsed and validated response
+     * @throws GuzzleException
      */
     public function invokeApiPost($command, $postParameters = [])
     {

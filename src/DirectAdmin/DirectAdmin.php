@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\TransferException;
 use Mvdgeijn\DirectAdmin\Context\AdminContext;
 use Mvdgeijn\DirectAdmin\Context\ResellerContext;
@@ -135,7 +136,9 @@ class DirectAdmin
      * @param string $command DirectAdmin API command to invoke
      * @param array $options Guzzle options to use for the call
      * @return array The unvalidated response
+     *
      * @throws DirectAdminException If anything went wrong on the network level
+     * @throws GuzzleException
      */
     public function invokeApi($method, $command, $options = [])
     {
