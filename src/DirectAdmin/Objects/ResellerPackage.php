@@ -12,7 +12,7 @@ use Mvdgeijn\DirectAdmin\Context\AdminContext;
  *
  * @author Niels Keurentjes <niels.keurentjes@omines.com>
  */
-class Package extends BaseObject
+class ResellerPackage extends BaseObject
 {
     private bool $aftp;
 
@@ -87,11 +87,13 @@ class Package extends BaseObject
         $this->aftp = $params['aftp'] == "ON";
         $this->bandwidth = (int) $params['bandwidth'];
         $this->catchall = $params['catchall'] == "ON";
+        $this->cgi = $params['cgi'] == "ON";
         $this->cron = $params['cron'] == "ON";
         $this->dns = $params['dns'] == "ON";
         $this->dnscontrol = $params['dnscontrol'] == "ON";
         $this->domainptr = $params['domainptr'];
         $this->ftp = $params['ftp'];
+        $this->inode = $params['inode'];
         $this->ips = $params['ips'];
         $this->login_keys = $params['login_keys'] == "ON";
         $this->mysql = $params['mysql'];
