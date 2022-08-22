@@ -23,13 +23,13 @@ class Ip extends BaseObject
 {
     private string $gateway;
 
-    private bool $global;
+    private ?bool $global = null;
 
     private string $netmask;
 
     private string $reseller;
 
-    private string $linked_ip;
+    private ?string $linked_ip = null;
 
     private string $ns;
 
@@ -51,7 +51,10 @@ class Ip extends BaseObject
         parse_str( $content, $params );
 
         $this->gateway = $params['gateway'];
-        $this->global = $params['global'] == "yes";
+
+        if( isset( $params['global'] ) )
+            $this->global = $params['global'] == "yes";
+
         $this->netmask = $params['netmask'];
         $this->ns = $params['ns'];
         $this->reseller = $params['reseller'];
@@ -91,16 +94,16 @@ class Ip extends BaseObject
     /**
      * @return bool
      */
-    public function isGlobal(): bool
+    public function isGlobal(): ?bool
     {
-        return $this->global;
+        return( $this->global || ( $this->global == null ) );
     }
 
     /**
      * @param bool $global
      * @return Ip
      */
-    public function setGlobal(bool $global): Ip
+    public function setGlobal(?bool $global): Ip
     {
         $this->global = $global;
         return $this;
@@ -200,7 +203,7 @@ class Ip extends BaseObject
     /**
      * @return string
      */
-    public function getLinkedIp(): string
+    public function getLinkedIp(): ?string
     {
         return $this->linked_ip;
     }
@@ -209,7 +212,7 @@ class Ip extends BaseObject
      * @param string $linked_ip
      * @return Ip
      */
-    public function setLinkedIp(string $linked_ip): Ip
+    public function setLinkedIp(?string $linked_ip): Ip
     {
         $this->linked_ip = $linked_ip;
 
