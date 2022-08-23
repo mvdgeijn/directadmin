@@ -173,24 +173,29 @@ class AdminContext extends ResellerContext
     }
 
     /**
-     * @param string $ip
-     * @param string $netmask
-     * @return array
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * Delete the free and unassigned IP('s)
+     *
+     * @param string|array $ips
+     * @return bool
      */
-    public function assignIP( string $reseller, array $ips ): bool
+    public function deleteIPs(string|array $ips ): bool
     {
         try {
             $params = [
                 'action' => 'select',
-                'assign' => "1",
-                'reseller' => $reseller,
+                'delete' => "1"
             ];
 
-            $i = 0;
-            foreach( $ips as $ip ) {
-                $params["select$i"] = $ip;
-                $i++;
+            if( is_string( $ips ) ) {
+                $params["select0"] = $ips;
+            }
+            else
+            {
+                $i = 0;
+                foreach ($ips as $ip) {
+                    $params["select$i"] = $ip;
+                    $i++;
+                }
             }
 
             $result = $this->invokeApiPost(
@@ -206,6 +211,46 @@ class AdminContext extends ResellerContext
         return $result;
     }
 
+    /**
+     * Assign IP('s) to reseller
+     *
+     * @param string $reseller
+     * @param string|array $ips
+     * @return bool
+     */
+    public function assignIP(string $reseller, string|array $ips ): bool
+    {
+        try {
+            $params = [
+                'action' => 'select',
+                'assign' => "1",
+                'reseller' => $reseller,
+            ];
+
+            if( is_string( $ips ) ) {
+                $params["select0"] = $ips;
+            }
+            else
+            {
+                $i = 0;
+                foreach ($ips as $ip) {
+                    $params["select$i"] = $ip;
+                    $i++;
+                }
+            }
+
+            $result = $this->invokeApiPost(
+                'IP_MANAGER',
+                $params);
+
+            $result = $result['error'] == "0";
+        } catch( DirectAdminException|GuzzleException $e ) {
+            error_log( $e->getMessage() );
+            $result = false;
+        }
+
+        return $result;
+    }
 
     /**
      * Returns a new AdminContext acting as the specified admin.
