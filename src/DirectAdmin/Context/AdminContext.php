@@ -172,6 +172,40 @@ class AdminContext extends ResellerContext
         return $result;
     }
 
+    /**
+     * @param string $ip
+     * @param string $netmask
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function assignIP( string $reseller, array $ips ): bool
+    {
+        try {
+            $params = [
+                'action' => 'select',
+                'assign' => "1",
+                'reseller' => $reseller,
+            ];
+
+            $i = 0;
+            foreach( $ips as $ip ) {
+                $params["select$i"] = $ip;
+                $i++;
+            }
+
+            $result = $this->invokeApiPost(
+                'IP_MANAGER',
+                $params);
+
+            $result = $result['error'] == "0";
+        } catch( DirectAdminException|GuzzleException $e ) {
+            error_log( $e->getMessage() );
+            $result = false;
+        }
+
+        return $result;
+    }
+
 
     /**
      * Returns a new AdminContext acting as the specified admin.
