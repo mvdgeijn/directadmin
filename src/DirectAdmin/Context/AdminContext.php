@@ -212,6 +212,90 @@ class AdminContext extends ResellerContext
     }
 
     /**
+     * Link the subIP to the mainIP
+     *
+     * @param string $mainIp
+     * @param string $subIp
+     * @param string $dns
+     * @param bool $apache
+     * @param bool $apply
+     * @param bool $background
+     * @return bool
+     */
+    public function linkIP(string $mainIp, string $subIp, string $dns = "yes", bool $apache = true, bool $apply = true, bool $background = true ): bool
+    {
+        try {
+            $params = [
+                'action' => 'add',
+                'link' => 'add',
+                'ip' => $mainIp,
+                'ip_to_link' => $subIp,
+                'dns' => $dns ? "yes" : "no",
+                'apache' => $apache ? "yes" : "no",
+                'apply' => $apply ? "yes" : "no",
+                'background' => $background ? "yes" : "no"
+            ];
+
+            $result = $this->invokeApiPost(
+                'IP_MANAGER_DETAILS',
+                $params);
+
+            $result = $result['error'] == "0";
+        } catch( DirectAdminException|GuzzleException $e ) {
+            error_log( $e->getMessage() );
+            $result = false;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Unlink IP(s) from the main IP
+     *
+     * @param string $mainIp
+     * @param string|array $subIps
+     * @param bool $flushDns
+     * @param bool $rewriteApache
+     * @return bool
+     */
+    public function unlinkIP(string $mainIp, string|array $subIps, bool $flushDns = true, bool $rewriteApache = true ): bool
+    {
+        try {
+            $params = [
+                'action' => 'select',
+                'remove' => 'Un_Link',
+                'ip' => $mainIp,
+                'flush_dns' => $flushDns ? "yes" : "no",
+                'rewrite_apache' => $rewriteApache ? "yes" : "no"
+            ];
+
+            if( is_string( $subIps ) ) {
+                $params["select0"] = $subIps;
+            }
+            else
+            {
+                $i = 0;
+                foreach ($subIps as $ip) {
+                    $params["select$i"] = $ip;
+                    $i++;
+                }
+            }
+
+            $result = $this->invokeApiPost(
+                'IP_MANAGER_DETAILS',
+                $params);
+
+            $result = $result['error'] == "0";
+        } catch( DirectAdminException|GuzzleException $e ) {
+            error_log( $e->getMessage() );
+            $result = false;
+        }
+
+        return $result;
+    }
+
+
+    /**
      * Assign IP('s) to reseller
      *
      * @param string $reseller
