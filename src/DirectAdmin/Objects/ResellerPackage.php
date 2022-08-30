@@ -102,7 +102,6 @@ class ResellerPackage extends BaseObject
         $this->nemailr = $params['nemailr'];
         $this->nemails = $params['nemails'];
         $this->nsubdomains = $params['nsubdomains'];
-        $this->nusers = $params['nusers'];
         $this->oversell = $params['oversell'] == "ON";
         $this->php = $params['php'] == "ON";
         $this->quota = (int) $params['quota'];
