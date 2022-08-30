@@ -12,11 +12,6 @@ automation of our own DirectAdmin servers, and the existing implementations were
 
 [API documentation for this project is automatically generated on each push](https://mvdgeijn.github.io/directadmin/api/).
 
-## Changed / Added
-
-- Creation of Login Keys
-- Added requesting of Database users
-
 ## Installation
 
 [![Packagist](https://img.shields.io/packagist/v/mvdgeijn/directadmin.svg)](https://packagist.org/packages/mvdgeijn/directadmin)
@@ -34,8 +29,8 @@ If you're not familiar with `composer` follow the installation instructions for
 
 ## Dependencies
 
-The library uses [Guzzle 6](https://github.com/guzzle/guzzle) as its HTTP communication layer. PHP versions supported
-are 5.6, 7.0, 7.1 and hhvm.
+The library uses [Guzzle 7](https://github.com/guzzle/guzzle) as its HTTP communication layer. PHP versions supported
+are 7.0, 7.1, 8.0, 8.1 and hhvm.
 
 ## Basic usage
 
