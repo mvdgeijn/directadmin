@@ -63,7 +63,13 @@ class Domain extends BaseObject
     public function __construct($name, UserContext $context, $config)
     {
         parent::__construct($name, $context);
-        $this->setConfig($context, is_array($config) ? $config : \GuzzleHttp\Psr7\parse_query($config));
+
+        if( is_string( $config ) )
+            parse_str( $config, $params );
+        else
+            $params = $config;
+
+        $this->setConfig($context, $params);
     }
 
     /**

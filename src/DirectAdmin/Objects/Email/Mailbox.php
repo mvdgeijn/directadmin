@@ -32,7 +32,10 @@ class Mailbox extends MailObject
     {
         parent::__construct($prefix, $domain);
         if (isset($config)) {
-            $this->setCache(self::CACHE_DATA, is_string($config) ? \GuzzleHttp\Psr7\parse_query($config) : $config);
+            if( is_string($config) )
+                parse_str($config, $config);
+
+            $this->setCache(self::CACHE_DATA, $config);
         }
     }
 
@@ -161,7 +164,8 @@ class Mailbox extends MailObject
                 'action' => 'full_list',
             ]);
 
-            return \GuzzleHttp\Psr7\parse_query($result[$this->getPrefix()]);
+            parse_str( $result[$this->getPrefix()], $params );
+            return $params;
         });
     }
 }
