@@ -10,6 +10,7 @@
 
 namespace Mvdgeijn\DirectAdmin\Objects;
 
+use GuzzleHttp\Psr7\Query;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\Domains\Subdomain;
@@ -64,12 +65,7 @@ class Domain extends BaseObject
     {
         parent::__construct($name, $context);
 
-        if( is_string( $config ) )
-            parse_str( $config, $params );
-        else
-            $params = $config;
-
-        $this->setConfig($context, $params);
+        $this->setConfig($context, is_array($config ) ? $config : Query::parse($config ));
     }
 
     /**

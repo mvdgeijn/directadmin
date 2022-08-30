@@ -10,6 +10,7 @@
 
 namespace Mvdgeijn\DirectAdmin\Objects\Email;
 
+use GuzzleHttp\Psr7\Query;
 use Mvdgeijn\DirectAdmin\Objects\Domain;
 
 /**
@@ -32,10 +33,8 @@ class Mailbox extends MailObject
     {
         parent::__construct($prefix, $domain);
         if (isset($config)) {
-            if( is_string($config) )
-                parse_str($config, $config);
 
-            $this->setCache(self::CACHE_DATA, $config);
+            $this->setCache(self::CACHE_DATA, is_array( $config ) ? $config : Query::parse( $config ) );
         }
     }
 
@@ -164,8 +163,7 @@ class Mailbox extends MailObject
                 'action' => 'full_list',
             ]);
 
-            parse_str( $result[$this->getPrefix()], $params );
-            return $params;
+            return Query::parse( $result[$this->getPrefix()] );
         });
     }
 }
