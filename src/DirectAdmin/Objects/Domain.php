@@ -10,6 +10,7 @@
 
 namespace Mvdgeijn\DirectAdmin\Objects;
 
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Query;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
@@ -79,8 +80,9 @@ class Domain extends BaseObject
      * @param bool|null $php Whether PHP is to be enabled, or NULL to fallback to account default
      * @param bool|null $cgi Whether CGI is to be enabled, or NULL to fallback to account default
      * @return Domain The newly created domain
+     * @throws GuzzleException
      */
-    public static function create(User $user, $domainName, $bandwidthLimit = null, $diskLimit = null, $ssl = null, $php = null, $cgi = null)
+    public static function create(User $user, $domainName, $bandwidthLimit = null, $diskLimit = null, $ssl = null, $php = null, $cgi = null): Domain
     {
         $options = [
             'action' => 'create',

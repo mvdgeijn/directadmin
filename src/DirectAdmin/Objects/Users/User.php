@@ -10,6 +10,7 @@
 
 namespace Mvdgeijn\DirectAdmin\Objects\Users;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Mvdgeijn\DirectAdmin\Context\ResellerContext;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
 use Mvdgeijn\DirectAdmin\DirectAdmin;
@@ -85,6 +86,7 @@ class User extends BaseObject
      * @param bool|null $php Whether PHP is to be enabled, or NULL to fallback to account default
      * @param bool|null $cgi Whether CGI is to be enabled, or NULL to fallback to account default
      * @return Domain Newly created domain
+     * @throws GuzzleException
      */
     public function createDomain(string $domainName, $bandwidthLimit = null, $diskLimit = null, $ssl = null, $php = null, $cgi = null): Domain
     {
