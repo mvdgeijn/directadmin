@@ -225,7 +225,7 @@ class ResellerContext extends UserContext
     }
 
     /**
-     * Returns the list of reseller packages
+     * Returns the list of user packages for this reseller
      *
      * @return UserPackage[]
      */
@@ -235,7 +235,7 @@ class ResellerContext extends UserContext
     }
 
     /**
-     * Returns the reseller package
+     * Returns the requested user package for this reseller
      *
      * @return UserPackage
      */
