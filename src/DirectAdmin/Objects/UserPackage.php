@@ -8,9 +8,9 @@ namespace Mvdgeijn\DirectAdmin\Objects;
 use Mvdgeijn\DirectAdmin\Context\ResellerContext;
 
 /**
- * Database.
+ * UserPackage
  *
- * @author Niels Keurentjes <niels.keurentjes@omines.com>
+ * @author Marc van de Geijn <marc@vdgeijn.com>
  */
 class UserPackage extends BaseObject
 {
@@ -66,6 +66,8 @@ class UserPackage extends BaseObject
 
     private string $vdomains;
 
+    private ?array $feature_sets = null;
+
     /**
      * Package constructor.
      *
@@ -104,6 +106,10 @@ class UserPackage extends BaseObject
         $this->suspend_at_limit = $params['suspend_at_limit'] == "ON";
         $this->sysinfo = $params['sysinfo'] == "ON";
         $this->vdomains = $params['vdomains'];
+
+        if( isset( $params['feature_sets'] ) ) {
+            $this->feature_sets = explode( ":", $params['feature_sets'] );
+        }
     }
 
     /**
@@ -582,4 +588,29 @@ class UserPackage extends BaseObject
         return $this;
     }
 
+    /**
+     * @return bool
+     */
+    public function hasFeatureSets(): bool
+    {
+        return $this->feature_sets != null;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getFeatureSets(): ?array
+    {
+        return $this->feature_sets;
+    }
+
+    /**
+     * @param array|null $set
+     * @return $this
+     */
+    public function setFeatureSets(?array $set ): UserPackage
+    {
+        $this->feature_sets = $set;
+        return $this;
+    }
 }
