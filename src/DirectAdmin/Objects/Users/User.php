@@ -17,6 +17,7 @@ use Mvdgeijn\DirectAdmin\DirectAdmin;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
 use Mvdgeijn\DirectAdmin\Objects\Database;
+use Mvdgeijn\DirectAdmin\Objects\DnsMx;
 use Mvdgeijn\DirectAdmin\Objects\Domain;
 use Mvdgeijn\DirectAdmin\Objects\LoginKey;
 use Mvdgeijn\DirectAdmin\Utility\Conversion;
@@ -233,6 +234,9 @@ class User extends BaseObject
         });
     }
 
+    /**
+     * @return array
+     */
     public function getDatabaseQuotas(): array
     {
         return $this->getCache(self::CACHE_DATABASE_QUOTAS, function () {
@@ -247,6 +251,14 @@ class User extends BaseObject
 
             return $quotas;
         });
+    }
+
+    /**
+     * @param $domainName
+     */
+    public function getDnsMx($domainName )
+    {
+        return new DnsMx( $domainName, $this->getContext(), $this->getContext()->invokeApiGet('DNS_MX', ['domain' => $domainName]) );
     }
 
     /**
@@ -285,6 +297,9 @@ class User extends BaseObject
         return $this->getConfig('usertype');
     }
 
+    /**
+     * @return array
+     */
     public function getUsage(): array
     {
         return $this->getCache(self::CACHE_USAGE,function () {

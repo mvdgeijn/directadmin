@@ -72,9 +72,21 @@ class UserContext extends BaseContext
         return $this->user;
     }
 
+    /**
+     * @return array
+     */
     public function getUsage()
     {
         return $this->getContextUser()->getUsage();
+    }
+
+    /**
+     * @param $domainName
+     * @return array|null
+     */
+    public function getDnsMx( $domainName )
+    {
+        return $this->getContextUser()->getDnsMx( $domainName );
     }
 
     /**
@@ -83,7 +95,7 @@ class UserContext extends BaseContext
      * @param string $domainName The requested domain name
      * @return Domain|null The domain if found, or NULL if it does not exist
      */
-    public function getDomain($domainName)
+    public function getDomain( $domainName )
     {
         return $this->getContextUser()->getDomain($domainName);
     }
