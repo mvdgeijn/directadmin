@@ -1,5 +1,6 @@
-/.idea/
-/.php_cs.cache
+/.idea/*.xml
+/.idea
+.php_cs.cache
 /build/
 /composer.lock
 /composer.phar
