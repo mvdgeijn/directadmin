@@ -57,6 +57,7 @@ abstract class BaseContext
      * @param string $command DirectAdmin API command to invoke
      * @param array $query Optional query parameters
      * @return array The parsed and validated response
+     * @throws DirectAdminException
      */
     public function invokeApiGet($command, $query = [])
     {

@@ -175,6 +175,7 @@ class ResellerContext extends UserContext
      *
      * @param $domain
      * @return array
+     * @throws DirectAdminException
      */
     public function getDomainOwner( $domain )
     {
