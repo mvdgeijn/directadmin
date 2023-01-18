@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin\Context;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
 use Mvdgeijn\DirectAdmin\Objects\UserPackage;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
@@ -174,12 +175,15 @@ class ResellerContext extends UserContext
      * Get the user that belongs to the domain
      *
      * @param $domain
-     * @return array
-     * @throws DirectAdminException
+     * @return array|null
      */
     public function getDomainOwner( $domain )
     {
-        return $this->invokeApiGet('DOMAIN_OWNERS', ['domain' => $domain ] );
+        try {
+            return $this->invokeApiGet('DOMAIN_OWNERS', ['domain' => $domain ] );
+        } catch( DirectAdminException $e ) {
+            return null;
+        }
     }
 
     /**
