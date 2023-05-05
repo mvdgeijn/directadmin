@@ -407,6 +407,17 @@ class User extends BaseObject
     }
 
     /**
+     * @param bool $ssh
+     * @return $this
+     */
+    public function setSsh(bool $ssh)
+    {
+        $this->modifyConfig(['ssh' => $ssh ? 'ON' : 'OFF']);
+
+        return $this;
+    }
+
+    /**
      * Constructs the correct object from the given user config.
      *
      * @param array $config The raw config from DirectAdmin
