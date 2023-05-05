@@ -331,6 +331,14 @@ class User extends BaseObject
         return Conversion::toBool($this->getConfig('ssl'));
     }
 
+    /**
+     * @return bool Whether the user can use SSL
+     */
+    public function hasSSH(): bool
+    {
+        return Conversion::toBool($this->getConfig('ssh'));
+    }
+
     public function impersonate(): UserContext
     {
         /** @var ResellerContext $context */
