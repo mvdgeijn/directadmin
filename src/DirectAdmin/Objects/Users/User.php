@@ -339,6 +339,9 @@ class User extends BaseObject
         return Conversion::toBool($this->getConfig('ssh'));
     }
 
+    /**
+     * @return UserContext
+     */
     public function impersonate(): UserContext
     {
         /** @var ResellerContext $context */
