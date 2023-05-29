@@ -11,6 +11,7 @@
 namespace Mvdgeijn\DirectAdmin\Objects;
 
 use DateTime;
+use Mvdgeijn\DirectAdmin\DirectAdmin;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
