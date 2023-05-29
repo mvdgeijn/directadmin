@@ -82,6 +82,11 @@ class LoginKey extends BaseObject
             'select_allow3' => 'CMD_PLUGINS',      // nodig voor Installatron
             'select_allow4' => 'CMD_API_DATABASES', // nodig voor Installatron (aanmaken db's voor bv. Wordpress)
         ];
+        
+        if( $user->getType() == DirectAdmin::ACCOUNT_TYPE_RESELLER ) {
+            $options['select_allow5'] = 'ALL_RESELLER';
+        }
+        
         $user->getContext()->invokeApiPost('LOGIN_KEYS', $options);
 
         return new self($keyname, $keyvalue, $user, $user->getContext());
