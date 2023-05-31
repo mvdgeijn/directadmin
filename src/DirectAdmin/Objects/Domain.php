@@ -149,6 +149,55 @@ class Domain extends BaseObject
     }
 
     /**
+     * Upload the private and public key
+     *
+     * @param string $sslPrivateAndPublicPem
+     * @return array
+     * @throws GuzzleException
+     */
+    public function uploadSslPrivatePublic(string $private, string $public )
+    {
+        $parameters = [
+            'domain' => $this->domainName,
+            'type' => 'paste',
+            'action' => 'save',
+            'certificate' => $private . "\n" . $public
+        ];
+
+        $response = $this->getContext()->invokeApiPost('SSL', $parameters );
+
+        return $response;
+    }
+
+    /**
+     * Upload the cacert bundle. Can be null to deactive cacert
+     *
+     * @param string|null $cacert
+     * @return array
+     * @throws GuzzleException
+     */
+    public function uploadSslCaCert(?string $cacert = null)
+    {
+        $parameters = [
+            'domain' => $this->domainName,
+            'type' => 'cacert',
+            'action' => 'save'
+        ];
+
+        if( $cacert != null ) {
+            $parameters['active'] = 'yes';
+            $parameters['cacert'] = $cacert;
+        } else {
+            $parameters['active'] = 'no';
+            $parameters['cacert'] = '';
+        }
+
+        $response = $this->getContext()->invokeApiPost('SSL', $parameters );
+
+        return $response;
+    }
+
+    /**
      * Creates a new subdomain.
      *
      * @param string $prefix Prefix to add before the domain name
