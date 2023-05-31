@@ -19,6 +19,7 @@ use Mvdgeijn\DirectAdmin\Objects\BaseObject;
 use Mvdgeijn\DirectAdmin\Objects\Database;
 use Mvdgeijn\DirectAdmin\Objects\DnsMx;
 use Mvdgeijn\DirectAdmin\Objects\Domain;
+use Mvdgeijn\DirectAdmin\Objects\FileManager;
 use Mvdgeijn\DirectAdmin\Objects\LoginKey;
 use Mvdgeijn\DirectAdmin\Utility\Conversion;
 
@@ -287,6 +288,16 @@ class User extends BaseObject
         }
 
         return $this->domains;
+    }
+
+    /**
+     * Return the filemanager object
+     *
+     * @return FileManager
+     */
+    public function getFileManager(): FileManager
+    {
+        return new FileManager( $this->getContext() );
     }
 
     /**
