@@ -187,7 +187,7 @@ class ResellerContext extends UserContext
     }
 
     /**
-     * Get the user that belongs to the domain
+     * Get the users for all domains
      *
      * @param $domain
      * @return array
