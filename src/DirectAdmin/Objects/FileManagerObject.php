@@ -6,7 +6,7 @@
 namespace Mvdgeijn\DirectAdmin\Objects;
 
 /**
- * FileManagerObject
+ * FileManagerObject. Can be a file, directory or link.
  *
  * @author Marc van de Geijn <marc@vdgeijn.com>
  */

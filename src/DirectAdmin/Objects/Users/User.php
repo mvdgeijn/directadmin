@@ -291,7 +291,7 @@ class User extends BaseObject
     }
 
     /**
-     * Return the filemanager object
+     * Return the filemanager instance
      *
      * @return FileManager
      */

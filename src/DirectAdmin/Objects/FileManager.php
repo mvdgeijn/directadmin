@@ -17,7 +17,7 @@ use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
 
 /**
- * Encapsulates a domain and its derived objects, like aliases, pointers and mailboxes.
+ * File manager
  *
  * @author Marc van de Geijn <marc@vdgeijn.com>
  */
