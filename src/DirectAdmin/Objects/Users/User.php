@@ -211,7 +211,7 @@ class User extends BaseObject
      *
      * @return string
      */
-    public function getSuspendReason(): string
+    public function getSuspendReason(): ?string
     {
         return $this->getConfig('suspended_reason');
     }
@@ -221,7 +221,7 @@ class User extends BaseObject
      *
      * @return int
      */
-    public function getSuspendTimestamp(): int
+    public function getSuspendTimestamp(): ?int
     {
         return intval( $this->getConfig('suspend_date') );
     }
