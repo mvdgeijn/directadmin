@@ -250,4 +250,15 @@ class ResellerContext extends UserContext
         return $packages[$package] ?? null;
     }
 
+    /**
+     * Change the user package
+     *
+     * @param string $user
+     * @param string $package
+     * @return void
+     */
+    public function setUserPackage( string $user, string $package )
+    {
+        $response = $this->invokeApiGet('MODIFY_USER',['action' => 'package', 'user' => $user, 'package' => $package ]);
+    }
 }
