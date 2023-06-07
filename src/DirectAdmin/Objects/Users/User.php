@@ -207,6 +207,26 @@ class User extends BaseObject
     }
 
     /**
+     * Get the reason why the user is suspended
+     *
+     * @return string
+     */
+    public function getSuspendReason(): string
+    {
+        return $this->getConfig('suspended_reason');
+    }
+
+    /**
+     * Since when is the user suspended
+     *
+     * @return int
+     */
+    public function getSuspendTimestamp(): int
+    {
+        return intval( $this->getConfig('suspend_date') );
+    }
+    
+    /**
      * Returns the reseller's email address
      *
      * @return string
