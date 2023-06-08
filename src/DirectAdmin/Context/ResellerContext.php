@@ -261,22 +261,4 @@ class ResellerContext extends UserContext
     {
         return $this->invokeApiGet('MODIFY_USER',['action' => 'package', 'user' => $user, 'package' => $package ]);
     }
-
-    /**
-     * Change one of more settings.
-     *
-     * @param string $user
-     * @param array $settings
-     * @return array
-     * @throws GuzzleException
-     */
-    public function setUserSettings( string $user, array $settings )
-    {
-        $parameters = array_merge( $settings, [
-            'action' => 'customize',
-            'user' => $user
-        ]);
-
-        return $this->invokeApiPost( 'MODIFY_USER', $parameters, $settings );
-    }
 }
