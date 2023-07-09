@@ -96,13 +96,15 @@ class ResellerContext extends UserContext
     /**
      * Suspends a single account.
      *
-     * @param string $username Account to delete
+     * @param string $username Account to suspend
+     * @param string $reason (none|abuse|billing|inactive|other|spam|user_bandwidth|user_quota)
+     * @throws GuzzleException
      */
-    public function suspendAccount($username)
+    public function suspendAccount(string $username, string $reason = 'none'): void
     {
-        $this->suspendAccounts([$username]);
+        $this->suspendAccounts( [$username], true, $reason );
     }
-
+    
     /**
      * Unsuspends a single account.
      *
@@ -116,18 +118,25 @@ class ResellerContext extends UserContext
     /**
      * Suspends (or unsuspends) multiple accounts.
      *
-     * @param string[] $usernames Accounts to delete
+     * @param string[] $usernames Accounts to (un)suspend
      * @param bool $suspend (true - suspend, false - unsuspend)
+     * @param string $reason (none|abuse|billing|inactive|other|spam|user_bandwidth|user_quota)
+     * @throws GuzzleException
      */
-    public function suspendAccounts(array $usernames, $suspend = true)
+    public function suspendAccounts( array $usernames, bool $suspend = true, string $reason = 'none' ): void
     {
-        $options = ['suspend' => $suspend ? 'Suspend' : 'Unsuspend'];
+        $options = [
+            'suspend' => $suspend ? 'Suspend' : 'Unsuspend',
+            'reason' => $reason
+        ];
+
         foreach (array_values($usernames) as $idx => $username) {
             $options['select' . $idx] = $username;
         }
+
         $this->invokeApiPost('SELECT_USERS', $options);
     }
-
+    
     /**
      * Unsuspends multiple accounts.
      *
