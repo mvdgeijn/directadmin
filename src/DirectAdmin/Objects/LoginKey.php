@@ -55,7 +55,7 @@ class LoginKey extends BaseObject
      * @param string $token
      * @return LoginKey Newly created login key
      */
-    public static function create(User $user)
+    public static function create(User $user, array $extraOptions = [] )
     {
         $date = new DateTime();
         $date->modify('+120 minutes');
@@ -79,13 +79,18 @@ class LoginKey extends BaseObject
             'allow_htm' => 'yes',
             'select_allow0' => 'ALL_USER',
             'select_allow1' => 'CMD_LOGIN',
-            'select_allow2' => 'CMD_LOGOUT',
-            'select_allow3' => 'CMD_PLUGINS',      // nodig voor Installatron
-            'select_allow4' => 'CMD_API_DATABASES', // nodig voor Installatron (aanmaken db's voor bv. Wordpress)
+            'select_allow2' => 'CMD_LOGOUT'
         ];
+
+        $index = 3;
+        foreach( $extraOptions as $extraOption ) {
+            $options['select_allow' . $index ] = $extraOption;
+            $index++;
+        }
         
         if( $user->getType() == DirectAdmin::ACCOUNT_TYPE_RESELLER ) {
-            $options['select_allow5'] = 'ALL_RESELLER';
+            $options['select_allow' . $index ] = 'ALL_RESELLER';
+            $index++;
         }
         
         $user->getContext()->invokeApiPost('LOGIN_KEYS', $options);
