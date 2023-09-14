@@ -331,6 +331,14 @@ class User extends BaseObject
     /**
      * @return array
      */
+    public function getFeatureSets(): array
+    {
+        return explode(":", $this->getConfig('feature_sets') );
+    }
+    
+    /**
+     * @return array
+     */
     public function getUsage(): array
     {
         return $this->getCache(self::CACHE_USAGE,function () {
