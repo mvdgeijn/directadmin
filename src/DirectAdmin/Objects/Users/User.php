@@ -103,9 +103,9 @@ class User extends BaseObject
      *
      * @return LoginKey The newly created login key
      */
-    public function createLoginKey( ): LoginKey
+    public function createLoginKey( array $extraOptions = [] ): LoginKey
     {
-        return LoginKey::create($this->getSelfManagedUser() );
+        return LoginKey::create($this->getSelfManagedUser(), $extraOptions );
     }
 
     /**
