@@ -13,6 +13,7 @@ namespace Mvdgeijn\DirectAdmin\Objects\Users;
 use GuzzleHttp\Exception\GuzzleException;
 use Mvdgeijn\DirectAdmin\Context\ResellerContext;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\Context\BaseContext;
 use Mvdgeijn\DirectAdmin\DirectAdmin;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\BaseObject;
@@ -381,7 +382,7 @@ class User extends BaseObject
     /**
      * @return UserContext
      */
-    public function impersonate(): UserContext
+    public function impersonate(): BaseContext
     {
         /** @var ResellerContext $context */
         if (!($context = $this->getContext()) instanceof ResellerContext) {
