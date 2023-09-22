@@ -12,6 +12,7 @@ namespace Mvdgeijn\DirectAdmin\Objects\Users;
 
 use Mvdgeijn\DirectAdmin\Context\AdminContext;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
+use Mvdgeijn\DirectAdmin\Context\BaseContext;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
 
 /**
@@ -32,7 +33,7 @@ class Admin extends Reseller
     /**
      * @return AdminContext
      */
-    public function impersonate()
+    public function impersonate(): BaseContext
     {
         /** @var AdminContext $context */
         if (!($context = $this->getContext()) instanceof AdminContext) {
