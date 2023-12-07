@@ -14,6 +14,7 @@ use Mvdgeijn\DirectAdmin\DirectAdmin;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\Domain;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
+use Mvdgeijn\DirectAdmin\Objects\FileManager;
 
 /**
  * Context for user functions.
