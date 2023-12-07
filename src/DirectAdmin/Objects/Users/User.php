@@ -318,7 +318,11 @@ class User extends BaseObject
      */
     public function getFileManager(): FileManager
     {
-        return new FileManager( $this->getContext() );
+        if (!$this->isSelfManaged()) {
+            return $this->impersonate()->getFileManager();
+        } else {
+            return new FileManager( $this->getContext() );
+        }
     }
 
     /**
