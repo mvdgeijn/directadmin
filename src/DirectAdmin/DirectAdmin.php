@@ -159,7 +159,7 @@ class DirectAdmin
     public function loginAs($username)
     {
         // DirectAdmin format is to just pipe the accounts together under the master password
-        return new self($this->baseUrl, $this->authenticatedUser . "|{$username}", $this->password);
+        return ( new self($this->baseUrl, $this->authenticatedUser . "|{$username}", $this->password) )->setVerify( $this->verify );
     }
 
     /**
