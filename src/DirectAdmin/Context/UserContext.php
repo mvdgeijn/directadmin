@@ -111,6 +111,14 @@ class UserContext extends BaseContext
     }
 
     /**
+     * @return FileManager
+     */
+    public function getFileManager( )
+    {
+        return new FileManager( $this );
+    }
+    
+    /**
      * Returns the username of the current context.
      *
      * @return string Username for the current context
