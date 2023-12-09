@@ -10,11 +10,13 @@
 
 namespace Mvdgeijn\DirectAdmin\Objects;
 
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Query;
 use Mvdgeijn\DirectAdmin\Context\UserContext;
 use Mvdgeijn\DirectAdmin\DirectAdminException;
 use Mvdgeijn\DirectAdmin\Objects\Users\User;
+use Mvdgeijn\DirectAdmin\Utility\Conversion;
 
 /**
  * File manager
@@ -39,25 +41,49 @@ class FileManager extends BaseObject
     }
 
     /**
-     * @return User
+     * Get the owning user context.
+     *
+     * @return UserContext The owning user context.
      */
     public function getOwner()
     {
         return $this->owner;
     }
-
-    public function listDir( string $path = '/' ): ?array
+    
+    /**
+     * Get the list of files and directories in the specified path.
+     *
+     * @param string $path The directory path. Default is '/'
+     * @return array|null An array containing FileManagerObjects representing the files and directories in the specified path, or null if the path is empty
+     * @throws DirectAdminException If there is an error retrieving the list of files and directories
+     * @throws \Exception If there is an unknown error
+     */
+    public function listDir(string $path = '/' ): ?array
     {
-        $data = [];
+        $data = null;
+        $response = false;
 
-        $parameters = [
-            'path' => $path
-        ];
+        try {
+            $response = $this->getContext()->rawRequest('POST','/CMD_API_FILE_MANAGER', ['path' => $path]);
+        } catch( DirectAdminException $e ) {
 
-        $response = $this->getContext()->invokeApiPost('FILE_MANAGER', $parameters);
+            // Catch the DirectAdminException, as this is also thrown when the directory or file doesn't exist.
+            if( ! $e->getPrevious() instanceof \GuzzleHttp\Exception\ClientException || $e->getPrevious()->getCode() != 403 ) {
+                throw( $e );
+            }
+        } catch( \Exception $e ) {
+            throw( $e );
+        }
 
-        foreach( $response as $path => $line ) {
-            $data[$path] = new FileManagerObject( $path, $this, $line );
+        if( $response !== false ) {
+            if (!empty($response['error'])) {
+                throw new DirectAdminException("$method to $command failed: $response[details] ($response[text])");
+            }
+
+            $data = [];
+            foreach ($response as $path => $line) {
+                $data[$path] = new FileManagerObject($path, $this, $line);
+            }
         }
 
         return $data;
