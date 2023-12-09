@@ -41,46 +41,42 @@ class FileManagerObject extends BaseObject
     private string $truePath;
 
     /**
-     * FileManager constructor.
+     * Constructor method for the given class.
      *
-     * @param string $path
-     * @param UserContext $context Context within which the object is valid
+     * @param string $path The path for the object.
+     * @param FileManager $fileManager The FileManager object.
+     * @param string $content The content to be parsed.
+     *
+     * @return void
      */
-    public function __construct(string $path, FileManager $fileManager, string $content )
+    public function __construct(string $path, FileManager $fileManager, string $content)
     {
-        parent::__construct($path, $fileManager->getContext() );
-
-        parse_str( $content, $params );
-
+        parent::__construct($path, $fileManager->getContext());
         $this->path = $path;
 
-        $this->date = $params['date'];
+        $params = [];
+        parse_str($content, $params);
 
-        $this->atime = $params['atime'];
-
-        $this->mtime = $params['mtime'];
-
-        $this->gid = $params['gid'];
-
-        $this->uid = $params['uid'];
-
-        $this->permission = $params['permission'];
-
-        $this->showSize = $params['showsize'];
-
-        $this->size = $params['size'];
-
-        $this->trash = $params['trash'];
-
-        $this->isLink = $params['islink'];
-
-        $this->linkPath = $params['linkpath'];
-
-        $this->type = $params['type'];
-
-        $this->truePath = $params['truepath'];
+        $this->assignParamsToProperties($params);
     }
 
+    /**
+     * Assigns the values from the given array to the corresponding properties of this object.
+     *
+     * @param array $params An associative array containing the property names as keys and their respective values.
+     *                      The keys must match the property names of this object.
+     *
+     * @return void
+     */
+    private function assignParamsToProperties(array $params): void
+    {
+        foreach (get_object_vars($this) as $key => $value) {
+            if (isset($params[$key])) {
+                $this->$key = $params[$key];
+            }
+        }
+    }
+    
     /**
      * @return bool
      */
