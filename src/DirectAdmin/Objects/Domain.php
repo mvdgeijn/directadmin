@@ -56,6 +56,9 @@ class Domain extends BaseObject
     private $diskUsage;
 
     /** @var string */
+    private $quotaLimit;
+
+    /** @var string */
     private $ssl;
 
     /** @var string */
@@ -66,6 +69,9 @@ class Domain extends BaseObject
 
     /** @var string */
     private $localMail;
+
+    /** @var string */
+    private $cgi;
 
     /**
      * Construct the object.
@@ -415,6 +421,36 @@ class Domain extends BaseObject
     }
 
     /**
+     * @param string $newValue New value for the SSL setting (ON or OFF)
+     */
+    public function modify( )
+    {
+        $this->invokePost('DOMAIN', 'modify', [
+            $this->bandwidthLimit == 'unlimited' ? 'ubandwidth' : 'bandwidth' => $this->bandwidthLimit,
+            $this->quotaLimit     == 'unlimited' ? 'uquota'     : 'quota'     => $this->quotaLimit,
+            'ssl' => $this->ssl,
+            'php' => $this->php,
+            'cgi' => $this->cgi
+        ]);
+    }
+
+    /**
+     * @param string $newValue New value fo the SSL setting (NO or OFF)
+     */
+    public function setSsl( $newValue )
+    {
+        $this->ssl = $newValue;
+    }
+
+    /**
+     * @param string $newValue New value for the PHP setting (ON or OFF)
+     */
+    public function setPhp( $newValue )
+    {
+        $this->php = $newValue;
+    }
+
+    /**
      * Allows Domain object to be passed as a string with its domain name.
      *
      * @return string
@@ -444,11 +480,13 @@ class Domain extends BaseObject
         // Parse plain options
         $bandwidths = array_map('trim', explode('/', $config['bandwidth']));
         $this->bandwidthUsed = floatval($bandwidths[0]);
-        $this->bandwidthLimit = !isset($bandwidths[1]) || ctype_alpha($bandwidths[1]) ? null : floatval($bandwidths[1]);
+        $this->bandwidthLimit = $config['bandwidth_limit'];
         $this->diskUsage = floatval($config['quota']);
+        $this->quotaLimit = $config['quota_limit'];
 
         $this->ssl = $config['ssl'];
         $this->php = $config['php'];
+        $this->cgi = $config['cgi'];
         $this->suspended = $config['suspended'];
         $this->localMail = $config['local_mail'];
 
