@@ -55,6 +55,18 @@ class Domain extends BaseObject
     /** @var float */
     private $diskUsage;
 
+    /** @var string */
+    private $ssl;
+
+    /** @var string */
+    private $php;
+
+    /** @var string */
+    private $suspended;
+
+    /** @var string */
+    private $localMail;
+
     /**
      * Construct the object.
      *
@@ -271,6 +283,38 @@ class Domain extends BaseObject
     }
 
     /**
+     * @return string SSL ON or OFF
+     */
+    public function getSsl()
+    {
+        return $this->ssl;
+    }
+
+    /**
+     * @return string PHP ON or OFF
+     */
+    public function getPhp()
+    {
+        return $this->php;
+    }
+
+    /**
+     * @return string Local mail yes or no
+     */
+    public function getLocalMail()
+    {
+        return $this->localMail;
+    }
+
+    /**
+     * @return string Suspended yer or no
+     */
+    public function getSuspended()
+    {
+        return $this->suspended;
+    }
+
+    /**
      * Returns unified sorted list of main domain name, aliases and pointers.
      *
      * @return string[]
@@ -402,6 +446,11 @@ class Domain extends BaseObject
         $this->bandwidthUsed = floatval($bandwidths[0]);
         $this->bandwidthLimit = !isset($bandwidths[1]) || ctype_alpha($bandwidths[1]) ? null : floatval($bandwidths[1]);
         $this->diskUsage = floatval($config['quota']);
+
+        $this->ssl = $config['ssl'];
+        $this->php = $config['php'];
+        $this->suspended = $config['suspended'];
+        $this->localMail = $config['local_mail'];
 
         $this->aliases = array_filter(explode('|', $config['alias_pointers']));
         $this->pointers = array_filter(explode('|', $config['pointers']));
