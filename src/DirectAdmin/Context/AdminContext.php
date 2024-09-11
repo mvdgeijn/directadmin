@@ -142,6 +142,18 @@ class AdminContext extends ResellerContext
         return $packages[$package] ?? null;
     }
 
+   /**
+     * Change the reseller package
+     * 
+     * @param string $reseller
+     * @param string $package
+     * @return array
+     */
+    public function setResellerPackage( string $reseller, string $package )
+    {
+        return $this->invokeApiGet('MODIFY_RESELLER',['action' => 'package', 'user' => $reseller, 'package' => $package ]);
+    }
+    
     /**
      * Returns the list with all IPs
      *
