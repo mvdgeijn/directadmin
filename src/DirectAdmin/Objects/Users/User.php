@@ -172,6 +172,18 @@ class User extends BaseObject
     }
 
     /**
+     * Returns the reseller/creator of this user
+     */
+    public function getReseller(): ?string
+    {
+        if (empty($name = $this->getConfig('creator'))) {
+            return null;
+        }
+
+        return $name;
+    }
+    
+    /**
      * @return Domain|null The default domain for the user, if any
      */
     public function getDefaultDomain(): ?Domain
