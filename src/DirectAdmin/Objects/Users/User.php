@@ -35,6 +35,7 @@ class User extends BaseObject
     const CACHE_DATABASES = 'databases';
     const CACHE_DATABASE_QUOTAS = 'database_quotas';
     const CACHE_USAGE = 'usage';
+    const CACHE_DU = 'diskusage';
 
     /** @var Domain[] * */
     private $domains;
@@ -117,6 +118,18 @@ class User extends BaseObject
         return $this->getName();
     }
 
+    /**
+     * Get the disk usage breakdown of this user
+     * 
+     * @return callable|mixed
+     */
+    public function getUsageBreakdown()
+    {
+        return $this->getCache(self::CACHE_DU, function () {
+            return $this->getContext()->invokeApiGet('DU_BREAKDOWN' );
+        });
+    }
+    
     /**
      * Returns the bandwidth limit of the user.
      *
