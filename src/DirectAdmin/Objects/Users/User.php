@@ -409,6 +409,14 @@ class User extends BaseObject
     }
 
     /**
+     * @return bool Whether the user can use Cronjobs
+     */
+    public function hasCron(): bool
+    {
+        return Conversion::toBool($this->getConfig('cron'));
+    }
+    
+    /**
      * @return UserContext
      */
     public function impersonate(): BaseContext
@@ -485,6 +493,17 @@ class User extends BaseObject
     public function setSsh(bool $ssh)
     {
         $this->modifyConfig(['ssh' => $ssh ? 'ON' : 'OFF']);
+
+        return $this;
+    }
+
+    /**
+     * @param bool $cron
+     * @return $this
+     */
+    public function setCron(bool $cron)
+    {
+        $this->modifyConfig(['cron' => $cron ? 'ON' : 'OFF']);
 
         return $this;
     }
