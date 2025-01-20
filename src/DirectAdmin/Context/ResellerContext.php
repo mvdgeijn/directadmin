@@ -270,4 +270,16 @@ class ResellerContext extends UserContext
     {
         return $this->invokeApiGet('MODIFY_USER',['action' => 'package', 'user' => $user, 'package' => $package ]);
     }
+
+    /**
+     * Set the IP type (shared or not)
+     *
+     * @param string $ip
+     * @param bool   $share
+     * @return array
+     */
+    public function setIpConfig( string $ip, bool $share = true )
+    {
+        return $this->invokeApiPost('IP_CONFIG',['action' => 'select', 'select0' => $ip, 'share' => $share ? "yes" : "no" ]);
+    }    
 }
