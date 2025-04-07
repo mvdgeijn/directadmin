@@ -179,7 +179,30 @@ class ResellerContext extends UserContext
         return BaseObject::toObjectArray($this->invokeApiGet('SHOW_USERS'), User::class, $this);
     }
 
-
+    /**
+     * Set the password for the user. It can be set if the system, ftp and/or database passwords have to be reset
+     * all at once to the same password. Default is all passwords are set to the new password
+     *
+     * @param string $user
+     * @param string $password
+     * @param bool $system
+     * @param bool $ftp
+     * @param bool $database
+     * @return array
+     * @throws GuzzleException
+     */
+    public function setUserPassword( string $user, string $password, bool $system = true, bool $ftp = true, bool $database = true ): array
+    {
+        return $this->invokeApiPost('USER_PASSWD', [
+            'username' => $user,
+            'passwd' => $password,
+            'passwd2' => $password,
+            'system' => $system ? 'yes' : 'no',
+            'ftp' => $ftp ? 'yes' : 'no',
+            'database' => $database ? 'yes' : 'no'
+        ]);
+    }
+    
     /**
      * Get the user that belongs to the domain
      *
