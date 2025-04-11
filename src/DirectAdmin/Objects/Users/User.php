@@ -253,6 +253,20 @@ class User extends BaseObject
     }
     
     /**
+     * Check the auto security txt setting
+     *
+     * @return bool|null
+     */
+    public function getAutoSecurityTxt(): ?bool
+    {
+        $value = $this->getConfig('auto_security_txt');
+
+        if( is_null( $value ) ) return null;
+
+        return $value === "ON" ? true : false;
+    }
+    
+    /**
      * Returns the reseller's email address
      *
      * @return string
@@ -493,6 +507,17 @@ class User extends BaseObject
     public function setSsh(bool $ssh)
     {
         $this->modifyConfig(['ssh' => $ssh ? 'ON' : 'OFF']);
+
+        return $this;
+    }
+
+    /**
+     * @param bool $enable
+     * @return User
+     */
+    public function setAutoSecurityTxt( bool $enable )
+    {
+        $this->modifyConfig(['auto_security_txt' => $enable ? 'ON' : 'OFF']);
 
         return $this;
     }
