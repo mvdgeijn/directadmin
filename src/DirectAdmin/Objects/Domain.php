@@ -216,6 +216,25 @@ class Domain extends BaseObject
     }
 
     /**
+     * Disable let's encrypt certificate for this domain
+     *
+     * @return array
+     * @throws GuzzleException
+     */
+    public function disableLetsEncrypt()
+    {
+        $parameters = [
+            'domain' => $this->domainName,
+            'action' => 'save',
+            'disable_letsencrypt_autorenew' => 'Disable'
+        ];
+
+        $response = $this->getContext()->invokeApiPost('SSL', $parameters );
+
+        return $response['error'];
+    }
+    
+    /**
      * Creates a new subdomain.
      *
      * @param string $prefix Prefix to add before the domain name
