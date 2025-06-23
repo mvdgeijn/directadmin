@@ -126,10 +126,10 @@ class ResellerContext extends UserContext
     public function suspendAccounts( array $usernames, bool $suspend = true, string $reason = 'none' ): void
     {
         $options = [
-            'suspend' => $suspend ? 'Suspend' : 'Unsuspend',
-            'reason' => $reason
+            'reason' => $reason,
+            $suspend ? 'dosuspend' : 'dounsuspend' => 'yes',
         ];
-
+        
         foreach (array_values($usernames) as $idx => $username) {
             $options['select' . $idx] = $username;
         }
