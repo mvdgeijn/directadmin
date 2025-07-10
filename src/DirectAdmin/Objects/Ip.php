@@ -62,7 +62,7 @@ class Ip extends BaseObject
         $this->value = $params['value'];
 
         if( isset($params['linked_ips']) )
-            $this->linked_ip = $params['linked_ips'];
+            $this->linked_ip = strstr( $params['linked_ips'], '=', true );
     }
 
     /**
