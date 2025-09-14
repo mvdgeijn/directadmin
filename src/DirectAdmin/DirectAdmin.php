@@ -183,6 +183,8 @@ class DirectAdmin
             $body = $response->getBody()->getContents();
 
             return Conversion::responseToArray($body);
+        } catch( ClientException $exception) {
+            throw new DirectAdminException(sprintf('%s %s failed: ' . $exception->getResponse()->getReasonPhrase(), $method, $uri), $exception->getCode(), $exception);            
         } catch (TransferException $exception) {
             // Rethrow anything that causes a network issue
             throw new DirectAdminException(sprintf('%s request to %s failed', $method, $uri), 0, $exception);
