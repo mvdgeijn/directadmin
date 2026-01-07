@@ -167,6 +167,65 @@ class Domain extends BaseObject
     }
 
     /**
+     * Retrieves the redirect data from the API.
+     *
+     * @param int $pagesize Number of items per page for the request. Default is 50.
+     * @return mixed Response data from the API.
+     */
+    public function getRedirects( $pagesize = 50 )
+    {
+        $parameters = [
+            'json' => 'yes',
+            'domain' => $this->domainName,
+            'ipp' => $pagesize
+        ];
+
+        return $this->getContext()->invokeApiGet('REDIRECT', $parameters);
+    }
+
+    /**
+     * Adds a redirect from one URL to another with a specified type.
+     *
+     * @param string $from The source URL for the redirect (local path: e.g. /direct or / )
+     * @param string $to   The destination URL for the redirect: e.g. https://www.bhosted.nl
+     * @param string $type The type of the redirect: 301 (permanent), 302 (temporary), 303 (replaced)
+     * @param mixed
+     *
+     * @return void
+     */
+    public function addRedirect( $from, $to, $type )
+    {
+        $parameters = [
+            'domain' => $this->domainName,
+            'action' => 'add',
+            'from' => $from,
+            'to' => $to,
+            'type' => $type,
+            'json' => 'yes'
+        ];
+
+        return $this->getContext()->invokeApiPost('REDIRECT', $parameters);
+    }
+
+    /**
+     * Deletes a redirect for the specified target.
+     *
+     * @param string $to The target for the redirect to be deleted.
+     * @return mixed The response from the API after invoking the delete action.
+     */
+    public function delRedirect( $to )
+    {
+        $parameters = [
+            'domain' => $this->domainName,
+            'action' => 'delete',
+            'select0' => $to,
+            'json' => 'yes'
+        ];
+
+        return $this->getContext()->invokeApiPost('REDIRECT', $parameters);
+    }
+
+    /**
      * Upload the private and public key
      *
      * @param string $sslPrivateAndPublicPem
