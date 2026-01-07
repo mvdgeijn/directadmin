@@ -292,6 +292,53 @@ class Domain extends BaseObject
 
         return $response['error'];
     }
+
+    /**
+     * Enables Let's Encrypt SSL certificate for the domain.
+     *
+     * @return mixed The response from the API after invoking the SSL creation action.
+     */
+    public function enableLetsEncrypt( $www = true )
+    {
+        $parameters = [
+            'acme_provider' => "letsencrypt",
+            'action' =>"save",
+            'background' =>"auto",
+            'domain' =>$this->domainName,
+            'encryption' =>"sha256",
+            'json' =>"yes",
+            'keysize' =>"secp384r1",
+            'le_select0' =>$this->domainName,
+            'name' =>$this->domainName,
+            'request' =>"letsencrypt",
+            'type' =>"create",
+            'wildcard' =>"no"
+        ];
+
+        if( $www )
+            $parameters['le_select1'] = "www." . $this->domainName;
+
+        $response = $this->getContext()->invokeApiPost('SSL', $parameters );
+
+        return $response;
+    }
+
+    /**
+     * Retrieves the Let's Encrypt SSL certificate information for the current domain.
+     *
+     * @return mixed The response from the API containing SSL certificate details.
+     */
+    public function getLetsEncrypt()
+    {
+        $parameters = [
+            'domain'    => $this->domainName,
+            'json'      => "yes"
+        ];
+
+        $response = $this->getContext()->invokeApiGet('SSL', $parameters );
+
+        return $response;
+    }
     
     /**
      * Creates a new subdomain.
