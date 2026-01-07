@@ -182,7 +182,13 @@ class DirectAdmin
             }
             $body = $response->getBody()->getContents();
 
-            return Conversion::responseToArray($body);
+            // Requested JSON response?
+            if( strcasecmp($options['query']['json'] ?? '', 'yes') === 0 )
+                return json_decode( $body, true );
+            elseif( ( strcasecmp($options['form_params']['json'] ?? '', 'yes') === 0 ) )
+                return json_decode( $body, true );
+            else
+                return Conversion::responseToArray($body);
         } catch( ClientException $exception) {
             throw new DirectAdminException(sprintf('%s %s failed: ' . $exception->getResponse()->getReasonPhrase(), $method, $uri), $exception->getCode(), $exception);            
         } catch (TransferException $exception) {
