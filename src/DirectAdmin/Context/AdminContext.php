@@ -349,6 +349,16 @@ class AdminContext extends ResellerContext
     }
 
     /**
+     * Fetches the system information from the API.
+     *
+     * @return mixed details system information retrieved from the API response
+     */
+    public function getSystemInfo()
+    {
+        return $this->invokeApiGet('SYSTEM_INFO');
+    }
+
+    /**
      * Returns a new AdminContext acting as the specified admin.
      *
      * @param string $username
