@@ -349,6 +349,16 @@ class AdminContext extends ResellerContext
     }
 
     /**
+     * Fetches the load average metrics from the API.
+     *
+     * @return mixed The load average value retrieved from the API response
+     */
+    public function getLoadAverage()
+    {
+        return $this->invokeApiGet('LOAD_AVERAGE');
+    }
+    
+    /**
      * Fetches the system information from the API.
      *
      * @return mixed details system information retrieved from the API response
