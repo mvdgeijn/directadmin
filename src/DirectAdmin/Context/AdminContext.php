@@ -369,6 +369,16 @@ class AdminContext extends ResellerContext
     }
 
     /**
+     * Fetches the administrator statistics from the API.
+     *
+     * @return mixed details administrator statistics retrieved from the API response
+     */
+    public function getAdminStats()
+    {
+        return $this->invokeApiGet('ADMIN_STATS');
+    }
+
+    /**
      * Returns a new AdminContext acting as the specified admin.
      *
      * @param string $username
