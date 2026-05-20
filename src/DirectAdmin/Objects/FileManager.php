@@ -145,28 +145,34 @@ class FileManager extends BaseObject
         return empty($response['error']) || $response['error'] === '0';
     }
 
-
     /**
-     * Delete one or more files in the specified path.
+     * Remove one or more files in the specified path.
      *
      * @param string       $path  The directory path containing the file(s)
      * @param string|array $file  The filename or array of filenames to delete
      * @return bool
      * @throws GuzzleException
      */
-    public function deleteFile(string $path, string|array $file): bool
+    public function deleteFile(string $path, string|array $file, bool $trash = false ): bool
     {
         $parameters = [
-            'action'   => 'delete',
+            'action'   => 'multiple',
+            'button' => 'delete',
             'path'     => $path,
-            'filename' => (array) $file,
+            'trash' => $trash,
         ];
+
+        $select = 0;
+        foreach( (array)$file as $data ) {
+             $parameters['select' . $select] = $path . "/" . $data;
+             $select++;
+        }
 
         $response = $this->getContext()->invokeApiPost('FILE_MANAGER', $parameters);
 
         return empty($response['error']) || $response['error'] === '0';
-    }    
-
+    }
+    
     /**
      * Invokes a POST command on a domain object.
      *
